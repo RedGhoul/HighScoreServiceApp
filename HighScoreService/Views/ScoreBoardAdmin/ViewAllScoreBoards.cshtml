@@ -1,0 +1,78 @@
+﻿@model List<Domain.Entities.ScoreBoard>
+<link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
+<link href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css" rel="stylesheet">
+<div class="row btabletitle">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4 text-center">
+        <h1>Your Tables</h1>
+    </div>
+    <div class="col-md-4">
+    </div>
+
+</div>
+<div class="row btablespace">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 text-center">
+        <a class="btn btn-secondary btn-sm" asp-action="Create">Create</a>
+    </div>
+    <div class="col-md-4">
+    </div>
+
+</div>
+<div class="row btable">
+    <div class="col-md-12">
+        <table id="table"
+               data-search="true"
+               data-pagination="true">
+            <thead>
+                <tr>
+                    <th data-field="Identifier" data-sortable="true">
+                        Identifier
+                    </th>
+                    <th data-field="Name" data-sortable="true">
+                        Name
+                    </th>
+                    <th data-field="Game" data-sortable="true">
+                        Game
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr id="tr-id-@i" class="tr-class-@i" data-title="bootstrap table" data-object='{"key": "value"}'>
+
+                        <td id="td-id-@i" class="td-class-@i" data-title="bootstrap table">
+                            @Html.DisplayFor(modelItem => Model[i].Identifier)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model[i].Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model[i].Game.Name)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@Model[i].Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@Model[i].Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section Scripts{
+
+    <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
+
+    <script src="~/js/table.js"></script>
+}

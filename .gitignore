@@ -1,0 +1,17 @@
+.vscode/launch.json
+.vscode/tasks.json
+
+Application/bin
+Application/obj
+
+Domain/obj
+Domain/bin
+
+HighScoreService/obj
+HighScoreService/bin
+
+Infrastructure/obj
+Infrastructure/bin
+.vs/HighScoreService/config/applicationhost.config
+.vs/HighScoreService/DesignTimeBuild/.dtbcache.v2
+.vs/HighScoreService/v16/.suo
