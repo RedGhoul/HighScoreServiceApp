@@ -2,6 +2,7 @@
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace HighScoreService.Controllers.VIEW
 {
@@ -12,12 +13,12 @@ namespace HighScoreService.Controllers.VIEW
 
         public HomeController(ScoreService bookService)
         {
+
             _scoreService = bookService;
         }
 
         public IActionResult Index()
         {
-
             return View();
         }
 
