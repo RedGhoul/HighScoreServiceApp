@@ -1,6 +1,7 @@
 ﻿using Application.ViewModels;
 using Domain.Entities;
 using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +15,23 @@ namespace HighScoreService.Controllers.VIEW
     public class ScoreBoardAdminController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ScoreBoardAdminController(ApplicationDbContext context)
+        public ScoreBoardAdminController(ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ScoreBoards
         public async Task<IActionResult> ViewAllScoreBoards()
         {
-            var applicationDbContext = _context.ScoreBoards.Include(s => s.Game);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var applicationDbContext = _context.ScoreBoards
+                .Include(s => s.Game)
+                .Where(x => x.Game.ApplicationUserId.Equals(user.Id));
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,10 +42,15 @@ namespace HighScoreService.Controllers.VIEW
             {
                 return NotFound();
             }
-
+            
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            
             var scoreBoard = await _context.ScoreBoards
                 .Include(s => s.Game)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(
+                    m => m.Id == id && 
+                    m.Game.ApplicationUserId.Equals(user.Id));
+
             if (scoreBoard == null)
             {
                 return NotFound();
@@ -50,6 +63,7 @@ namespace HighScoreService.Controllers.VIEW
         [HttpGet]
         public async Task<IActionResult> CreateAsync()
         {
+
             CreateScoreBoardViewModel createScoreBoardView = new CreateScoreBoardViewModel();
             List<SelectListItem> list = new List<SelectListItem>();
             var games = await _context.Games.ToListAsync();
@@ -71,6 +85,7 @@ namespace HighScoreService.Controllers.VIEW
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,GameId")] ScoreBoardViewModel scoreBoard)
         {
+
             if (ModelState.IsValid)
             {
                 ScoreBoard score = new ScoreBoard();
@@ -86,12 +101,19 @@ namespace HighScoreService.Controllers.VIEW
         // GET: ScoreBoards/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var scoreBoard = await _context.ScoreBoards.FindAsync(id);
+            var scoreBoard = await _context.ScoreBoards
+                    .Include(s => s.Game)
+                    .FirstOrDefaultAsync(
+                        m => m.Id == id &&
+                        m.Game.ApplicationUserId.Equals(user.Id));
+
             if (scoreBoard == null)
             {
                 return NotFound();
@@ -140,10 +162,14 @@ namespace HighScoreService.Controllers.VIEW
             {
                 return NotFound();
             }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
 
             var scoreBoard = await _context.ScoreBoards
                 .Include(s => s.Game)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(
+                    m => m.Id == id &&
+                    m.Game.ApplicationUserId.Equals(user.Id));
+
             if (scoreBoard == null)
             {
                 return NotFound();
