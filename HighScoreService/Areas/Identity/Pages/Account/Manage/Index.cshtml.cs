@@ -1,12 +1,14 @@
-﻿using Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 
-namespace HighScoreService.Areas.Identity.Pages.Account.Manage
+namespace WebMVC.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
@@ -81,8 +83,8 @@ namespace HighScoreService.Areas.Identity.Pages.Account.Manage
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
+                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    return RedirectToPage();
                 }
             }
 

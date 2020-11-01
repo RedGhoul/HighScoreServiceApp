@@ -1,14 +1,21 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using Domain.Entities;
+using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(HighScoreService.Areas.Identity.IdentityHostingStartup))]
-namespace HighScoreService.Areas.Identity
+[assembly: HostingStartup(typeof(WebMVC.Areas.Identity.IdentityHostingStartup))]
+namespace WebMVC.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) =>
-            {
+            builder.ConfigureServices((context, services) => {
             });
         }
     }

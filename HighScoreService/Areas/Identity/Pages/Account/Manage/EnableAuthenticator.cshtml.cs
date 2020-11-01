@@ -1,15 +1,18 @@
-﻿using Domain.Entities;
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Linq;
+using System.Threading.Tasks;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 
-namespace HighScoreService.Areas.Identity.Pages.Account.Manage
+namespace WebMVC.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
@@ -146,7 +149,7 @@ namespace HighScoreService.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("HighScoreService"),
+                _urlEncoder.Encode("WebMVC"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

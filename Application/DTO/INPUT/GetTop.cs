@@ -3,6 +3,6 @@
     public class GetTop
     {
         public int NumberOfScores { get; set; }
-        public string ScoreBoardName { get; set; }
+        public string Identifier { get; set; }
     }
 }

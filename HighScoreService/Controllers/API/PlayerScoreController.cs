@@ -12,12 +12,12 @@ namespace HighScoreService.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ScoreBoardsController : ControllerBase
+    public class PlayerScoreController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private readonly ScoreService _scoreService;
 
-        public ScoreBoardsController(
+        public PlayerScoreController(
             ApplicationDbContext context,
             ScoreService scoreService)
         {
@@ -26,52 +26,48 @@ namespace HighScoreService.Controllers.API
         }
 
         // GET: api/ScoreBoards/Add
-        [HttpGet("Add")]
-        public async Task<ActionResult> AddScore(AddScore addScore)
+        [HttpPost("Add")]
+        public async Task<ActionResult> AddScore([FromQuery] AddScore addScore)
         {
-            var scoreBoard = await _context.ScoreBoards.Where(x => x.Name.Equals(addScore.ScoreBoardName)).FirstOrDefaultAsync();
+            var scoreBoard = await _context.ScoreBoards.Where(x => x.Identifier.Equals(addScore.Identifier)).FirstOrDefaultAsync();
             if (scoreBoard == null) return BadRequest("Could not find your board");
 
             var score = _scoreService.Create(new Score
             {
-                ScoreBoardName = scoreBoard.Name,
+                ScoreBoardIdentifier = scoreBoard.Identifier,
                 PlayerName = addScore.PlayerName,
                 ScoreAmount = addScore.Score,
-                TimeAmount = addScore.TimeAmount,
-                Description = addScore.Description
             });
 
             return Ok(new SanitizedScore
             {
                 PlayerName = score.PlayerName,
                 ScoreAmount = score.ScoreAmount,
-                TimeAmount = score.TimeAmount,
-                Description = score.Description
             });
 
         }
 
-        [HttpGet("Delete")]
-        public async Task<ActionResult> DeleteScoreBoard(DeleteScore deleteScore)
+        [HttpDelete("Delete")]
+        public async Task<ActionResult> DeleteScoreBoard([FromQuery] DeleteScore deleteScore)
         {
-            var scoreBoard = await _context.ScoreBoards.Where(x => x.Name.Equals(deleteScore.ScoreBoardName)).FirstOrDefaultAsync();
+            var scoreBoard = await _context.ScoreBoards.Where(x => x.Identifier.Equals(deleteScore.Identifier)).FirstOrDefaultAsync();
             if (scoreBoard == null) return BadRequest("Could not find your board");
             if (string.IsNullOrEmpty(deleteScore.PlayerName)) return BadRequest("Invalid User Name");
-            if (!await _scoreService.DeleteByUserNameAndBoard(scoreBoard.Name, deleteScore.PlayerName)) return BadRequest("Could Not Delete Scores");
+            if (!await _scoreService.DeleteByUserNameAndBoard(scoreBoard.Identifier, deleteScore.PlayerName)) return BadRequest("Could Not Delete Scores");
             return Ok();
         }
 
-        [HttpGet("DeleteAll")]
-        public async Task<ActionResult> DeleteScoreBoard(DeleteAllScores deleteAllScores)
+        [HttpPost("DeleteAll")]
+        public async Task<ActionResult> DeleteScoreBoard([FromQuery] DeleteAllScores deleteAllScores)
         {
-            var scoreBoard = await _context.ScoreBoards.Where(x => x.Name.Equals(deleteAllScores.ScoreBoardName)).FirstOrDefaultAsync();
+            var scoreBoard = await _context.ScoreBoards.Where(x => x.Identifier.Equals(deleteAllScores.Identifier)).FirstOrDefaultAsync();
             if (scoreBoard == null) return BadRequest("Could not find your board");
-            if (!await _scoreService.DeleteByBoardName(scoreBoard.Name)) return BadRequest("Could Not Delete Scores");
+            if (!await _scoreService.DeleteByBoardName(scoreBoard.Identifier)) return BadRequest("Could Not Delete Scores");
             return Ok();
         }
 
         [HttpGet("GetTop")]
-        public async Task<ActionResult> GetTopScores(GetTop getTop)
+        public async Task<ActionResult> GetTopScores([FromQuery] GetTop getTop)
         {
             if (getTop.NumberOfScores == 0)
             {
@@ -82,9 +78,9 @@ namespace HighScoreService.Controllers.API
                 return BadRequest("Number Of Scores was greater than 100");
             }
 
-            var scoreBoard = await _context.ScoreBoards.Where(x => x.Name.Equals(getTop.ScoreBoardName)).FirstOrDefaultAsync();
+            var scoreBoard = await _context.ScoreBoards.Where(x => x.Identifier.Equals(getTop.Identifier)).FirstOrDefaultAsync();
             if (scoreBoard == null) return BadRequest("Could not find your board");
-            var topScores = _scoreService.GetTopScores(scoreBoard.Name, getTop.NumberOfScores);
+            var topScores = _scoreService.GetTopScores(scoreBoard.Identifier, getTop.NumberOfScores);
             List<SanitizedScore> sanitized = new List<SanitizedScore>();
 
             foreach (var score in topScores)
@@ -93,8 +89,6 @@ namespace HighScoreService.Controllers.API
                 {
                     PlayerName = score.PlayerName,
                     ScoreAmount = score.ScoreAmount,
-                    TimeAmount = score.TimeAmount,
-                    Description = score.Description
                 });
             }
 

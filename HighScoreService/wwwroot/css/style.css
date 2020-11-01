@@ -1,5 +1,8 @@
 ﻿@charset "UTF-8";
 
+#login{
+    margin-top:20%;
+}
 .btn.btn-secondary.dropdown-toggle {
     padding: 12px 15px;
 }
@@ -13,9 +16,12 @@
     padding-top:20px;
     height:760px;
 }
-body {
+.pb-3.body {
+    padding-top: 10%;
+    margin: 0;
     background-color: #fff;
     color: #333;
+    min-height: calc(100vh - 100px);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -88,11 +94,6 @@ span {
   font-weight: 600;
   padding: 15px 40px;
   text-transform: uppercase;
-  /* -moz-transition: all 0.5s ease-in-out 0s;
-  -ms-transition: all 0.5s ease-in-out 0s;
-  -o-transition: all 0.5s ease-in-out 0s;
-  -webkit-transition: all 0.5s ease-in-out 0s;
-  transition: all 0.5s ease-in-out 0s; */
 }
 
 .btn-default:hover {
@@ -192,8 +193,7 @@ span {
 #hero {
   width: 100%;
   height: calc(100vh - 40px);
-  background: url(../img/hero-bg.png) center bottom no-repeat;
-  background-size: 100%;
+
   position: relative;
   margin-top: 40px;
 }
@@ -1182,7 +1182,6 @@ body.mobile-nav-active #mobile-nav-toggle i {
     bottom: 0;
     width: 100%;
     background: #2a2c30;
-    padding-top: 50px;
 }
 
 .footer .footer-logo .navbar-brand {

@@ -19,14 +19,16 @@ namespace HighScoreService.Controllers.VIEW
         // GET: ScoreBoards/Create
         public async Task<IActionResult> CreateScoreBoard()
         {
+
             ScoreBoard newScoreBoard = new ScoreBoard()
             {
-                Name = Guid.NewGuid().ToString(),
+                Name = new Faker().Company.CompanyName() + " Score Board Anonymous",
+                Identifier = Guid.NewGuid().ToString()
             };
 
             Game newGame = new Game()
             {
-                Name = new Faker().Name.FirstName(),
+                Name = new Faker().Name.FirstName() + " Game Anonymous",
                 Identifier = Guid.NewGuid().ToString(),
                 ScoreBoards = new List<ScoreBoard>()
             };
@@ -37,7 +39,7 @@ namespace HighScoreService.Controllers.VIEW
 
             await _context.SaveChangesAsync();
 
-            return View(newGame);
+            return View(newScoreBoard);
         }
     }
 }

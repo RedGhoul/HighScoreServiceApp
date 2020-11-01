@@ -22,7 +22,6 @@
     <link href="~/css/style.css" rel="stylesheet">
 
 </head>
-
 <body>
 
     <header id="header" class="header header-hide">
@@ -56,7 +55,7 @@
                             <a asp-action="ViewAllScoreBoards" asp-controller="ScoreBoardAdmin">Boards</a>
                         </li>
                         <li>
-                            <a href="~/swagger/index.html">API Docs</a>
+                            <a href="~/swagger/index.html" target="_blank" rel="noopener noreferrer">API Docs</a>
                         </li>
 
                         <li>
@@ -66,8 +65,8 @@
                     }
                     else
                     {
-                        <li><a asp-action="" asp-controller="">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#features">Features</a></li>
+
                         <li><a href="#contact">Contact</a></li>
                         <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
                         <li>
@@ -81,7 +80,7 @@
         </div>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 body">
             @RenderBody()
         </main>
     </div>
@@ -178,7 +177,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css" integrity="sha256-AWqwvQ3kg5aA5KcXpX25sYKowsX97sTCTbeo33Yfyk0=" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha256-z6FznuNG1jo9PP3/jBjL6P3tvLMtSwiVAowZPOgo56U=" crossorigin="anonymous"></script>
-    
+
     <!-- Template Main Javascript File -->
     <script src="~/js/main.js"></script>
     @RenderSection("Scripts", required: false)

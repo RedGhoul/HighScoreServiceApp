@@ -1,10 +1,10 @@
 ﻿<section id="hero" class="wow fadeIn">
     <div class="hero-container">
         <h1>Welcome to HighScoreService</h1>
-        <h2>An easy way for video game developers to add leader boards to their games </h2>
+        <h2>An easy way for game developers to add leader boards to their games </h2>
 
 
-        <a href="#get-started" class="btn-get-started scrollto">Sign Up Now Start Anonymously</a>
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn-get-started scrollto">Sign Up Now</a>
         <a asp-controller="ScoreBoard" asp-action="CreateScoreBoard" class="btn-get-started scrollto">Start Anonymously</a>
     </div>
 </section>
@@ -109,7 +109,7 @@
 <!--==========================
   Pricing Table Section
 ============================-->
-<section id="pricing" class="padd-section text-center wow fadeInUp">
+@*<section id="pricing" class="padd-section text-center wow fadeInUp">
 
     <div class="container">
         <div class="section-title text-center">
@@ -125,4 +125,4 @@
     .footer {
         position: inherit;
     }
-</style>
+</style>*@

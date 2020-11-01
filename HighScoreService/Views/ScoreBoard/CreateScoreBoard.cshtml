@@ -1,26 +1,32 @@
-﻿@model Domain.Entities.Game
+﻿@model Domain.Entities.ScoreBoard
 
-<h1>Create</h1>
 
-<h4>ScoreBoard</h4>
-<hr />
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Your score board has been created</h5>
-                    <p class="card-text">Here is your ScoreBoard Token: <b>@Model.ScoreBoards.FirstOrDefault().Name</b></p>
-                    <p class="card-text">Use your token every time you make a call to our service</p>
-                    <a href="~/swagger" class="btn btn-primary">Click me to see how to use it</a>
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="card shadow-lg" style="width: 60rem;">
+                <div class="card-body text-center">
+                    <h2 class="card-title">Your score board has been created :)</h2>
+                    <h3 class="card-title">Here is your ScoreBoard Identifier:</h3>
+                    <h3 class="card-title token">@Model.Identifier</h3>
+                    <h3 class="card-title">Keep this safe ! Don't Lose it</h3>
+                    <h3 class="card-title">Use your token every time you make a call to our service</h3>
+                    <a href="~/swagger" class="btn btn-primary card-btn-go">Click me to see how to use it</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-
-        </div>
     </div>
 </div>
+<style>
+    .card-title.token {
+        color: red;
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 22px;
+    }
+    .btn.btn-primary.card-btn-go {
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+</style>

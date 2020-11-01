@@ -1,14 +1,14 @@
-﻿using Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Text;
+using System.Threading.Tasks;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HighScoreService.Areas.Identity.Pages.Account
+namespace WebMVC.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
@@ -28,7 +28,7 @@ namespace HighScoreService.Areas.Identity.Pages.Account
 
         public string EmailConfirmationUrl { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string email)
+        public async Task<IActionResult> OnGetAsync(string email, string returnUrl = null)
         {
             if (email == null)
             {
@@ -52,7 +52,7 @@ namespace HighScoreService.Areas.Identity.Pages.Account
                 EmailConfirmationUrl = Url.Page(
                     "/Account/ConfirmEmail",
                     pageHandler: null,
-                    values: new { area = "Identity", userId = userId, code = code },
+                    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
             }
 

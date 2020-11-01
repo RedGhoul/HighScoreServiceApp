@@ -9,9 +9,9 @@ namespace Domain.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("ScoreBoardName")]
+        [BsonElement("ScoreBoardIdentifier")]
         [BsonRequired]
-        public string ScoreBoardName { get; set; }
+        public string ScoreBoardIdentifier { get; set; }
 
         [BsonElement("PlayerName")]
         [BsonRequired]

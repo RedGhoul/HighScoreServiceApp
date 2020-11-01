@@ -2,6 +2,6 @@
 {
     public class DeleteAllScores
     {
-        public string ScoreBoardName { get; set; }
+        public string Identifier { get; set; }
     }
 }
