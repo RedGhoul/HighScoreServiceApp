@@ -25,6 +25,7 @@
 <div class="row btable">
     <div class="col-md-12">
         <table id="table"
+               data-height="600"
                data-search="true"
                data-pagination="true">
             <thead>
@@ -36,7 +37,10 @@
                         Name
                     </th>
                     <th data-field="Game" data-sortable="true">
-                        Game
+                        Game Name
+                    </th>
+                    <th data-field="View Game" data-sortable="false">
+                        View Game
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -55,6 +59,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => Model[i].Game.Name)
                         </td>
+                        <th>
+                            <a asp-controller="GamesAdmin" asp-action="ViewAllGames">View</a>
+                        </th>
                         <td>
                             <a asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a> |
                             <a asp-action="Details" asp-route-id="@Model[i].Id">Details</a> |
@@ -67,7 +74,7 @@
     </div>
 
 </div>
-
+//https://github.com/LZorglub/DataTables.AspnetCore.Mvc
 @section Scripts{
 
     <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>

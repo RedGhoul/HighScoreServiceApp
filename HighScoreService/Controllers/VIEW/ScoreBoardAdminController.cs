@@ -118,13 +118,13 @@ namespace HighScoreService.Controllers.VIEW
             {
                 return NotFound();
             }
-            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id", scoreBoard.GameId);
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Name", scoreBoard.GameId);
             return View(scoreBoard);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,GameId")] ScoreBoardViewModel scoreBoard)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,GameId")] ScoreBoard scoreBoard)
         {
             if (id != scoreBoard.Id)
             {
@@ -151,7 +151,7 @@ namespace HighScoreService.Controllers.VIEW
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id", scoreBoard.GameId);
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Name", scoreBoard.GameId);
             return View(scoreBoard);
         }
 

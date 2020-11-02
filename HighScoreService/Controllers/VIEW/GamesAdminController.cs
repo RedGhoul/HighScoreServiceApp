@@ -49,6 +49,7 @@ namespace WebMVC.Controllers.VIEW
 
             var game = await _context.Games
                 .Include(x => x.ApplicationUser)
+                .Include(x => x.ScoreBoards)
                 .Where(x => x.ApplicationUserId.Equals(user.Id))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (game == null)
@@ -93,6 +94,7 @@ namespace WebMVC.Controllers.VIEW
 
             var game = await _context.Games
                 .Include(x => x.ApplicationUser)
+                .Include(x => x.ScoreBoards)
                 .Where(x => x.ApplicationUserId.Equals(user.Id))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (game == null)
@@ -151,6 +153,7 @@ namespace WebMVC.Controllers.VIEW
 
             var game = await _context.Games
                 .Include(x => x.ApplicationUser)
+                .Include(x => x.ScoreBoards)
                 .Where(x => x.ApplicationUserId.Equals(user.Id))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (game == null)

@@ -28,6 +28,7 @@
 
     <div class="col-md-12">
         <table id="table"
+               data-height="600"
                data-search="true"
                data-pagination="true">
             <thead>
@@ -41,29 +42,35 @@
                     <th data-field="Number Of Boards" data-sortable="true">
                         Number Of Boards
                     </th>
+                    <th data-field="View All Boards" data-sortable="false">
+                        View Boards
+                    </th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @for (int i = 0; i < Model.Count(); i++)
                 {
-                    <tr id="tr-id-@i" class="tr-class-@i" data-title="bootstrap table" data-object='{"key": "value"}'>
+                <tr id="tr-id-@i" class="tr-class-@i" data-title="bootstrap table" data-object='{"key": "value"}'>
 
-                        <td id="td-id-@i" class="td-class-@i" data-title="bootstrap table">
-                            @Html.DisplayFor(modelItem => Model[i].Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model[i].Identifier)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model[i].ScoreBoards.Count)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@Model[i].Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@Model[i].Id">Delete</a>
-                        </td>
-                    </tr>
+                    <td id="td-id-@i" class="td-class-@i" data-title="bootstrap table">
+                        @Html.DisplayFor(modelItem => Model[i].Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].Identifier)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].ScoreBoards.Count)
+                    </td>
+                    <td>
+                        <a asp-controller="ScoreBoardAdmin" asp-action="ViewAllScoreBoards">View</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@Model[i].Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@Model[i].Id">Delete</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
