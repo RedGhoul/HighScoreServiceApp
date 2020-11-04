@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Infrastructure.Persistence.Migrations
+namespace Infrastructure.Migrations
 {
-    public partial class init : Migration
+    public partial class dbinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +54,7 @@ namespace Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -76,7 +75,7 @@ namespace Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -161,8 +160,9 @@ namespace Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
+                    Identifier = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -181,7 +181,7 @@ namespace Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     GameId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -200,8 +200,9 @@ namespace Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
+                    Identifier = table.Column<string>(nullable: true),
                     GameId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -224,7 +225,8 @@ namespace Infrastructure.Persistence.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -250,7 +252,8 @@ namespace Infrastructure.Persistence.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Games_ApplicationUserId",
@@ -266,8 +269,7 @@ namespace Infrastructure.Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ScoreBoards_GameId",
                 table: "ScoreBoards",
-                column: "GameId",
-                unique: true);
+                column: "GameId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

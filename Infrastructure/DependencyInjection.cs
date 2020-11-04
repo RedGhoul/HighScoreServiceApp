@@ -23,8 +23,7 @@ namespace Infrastructure
                 AppDBConnectionString = Secrets.getConnectionString(configuration, "HighScoreService_DB_PROD");
             }
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
-                    AppDBConnectionString, options => options.SetPostgresVersion(13, 0)));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(AppDBConnectionString));
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
