@@ -1,30 +1,25 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿
+
+using Newtonsoft.Json;
+using System;
 
 namespace Domain.Entities
 {
     public class Score
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        public Score()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
         public string Id { get; set; }
-
-        [BsonElement("ScoreBoardIdentifier")]
-        [BsonRequired]
         public string ScoreBoardIdentifier { get; set; }
-
-        [BsonElement("PlayerName")]
-        [BsonRequired]
         public string PlayerName { get; set; }
-
-        [BsonElement("ScoreAmount")]
-        [BsonRequired]
         public double ScoreAmount { get; set; }
-
-        [BsonElement("TimeAmount")]
         public double TimeAmount { get; set; }
-
-        [BsonElement("Description")]
         public string Description { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int ScoreBoardId { get; set; }
+        [JsonIgnore]
+        public ScoreBoard ScoreBoard { get; set; }
     }
 }

@@ -18,14 +18,14 @@ namespace HighScoreService
             try
             {
                 configuration = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json", optional: false)
+                    .AddEnvironmentVariables()
                     .Build();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            using (SentrySdk.Init(Secrets.getConnectionString(configuration, "Sentry_URL")))
+            using (SentrySdk.Init(configuration.GetConnectionString("Sentry_URL")))
             {
                 Log.Logger = new LoggerConfiguration()
                .Enrich.FromLogContext()

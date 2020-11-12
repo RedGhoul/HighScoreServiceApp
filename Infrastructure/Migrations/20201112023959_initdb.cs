@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    public partial class dbinit : Migration
+    public partial class initdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +55,7 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -75,7 +76,7 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -160,7 +161,7 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true)
@@ -181,7 +182,7 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     GameId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -200,7 +201,7 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     GameId = table.Column<int>(nullable: false)
@@ -216,6 +217,30 @@ namespace Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Scores",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    ScoreBoardIdentifier = table.Column<string>(nullable: true),
+                    PlayerName = table.Column<string>(nullable: true),
+                    ScoreAmount = table.Column<double>(nullable: false),
+                    TimeAmount = table.Column<double>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    ScoreBoardId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Scores_ScoreBoards_ScoreBoardId",
+                        column: x => x.ScoreBoardId,
+                        principalTable: "ScoreBoards",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -225,8 +250,7 @@ namespace Infrastructure.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -252,8 +276,7 @@ namespace Infrastructure.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Games_ApplicationUserId",
@@ -270,6 +293,41 @@ namespace Infrastructure.Migrations
                 name: "IX_ScoreBoards_GameId",
                 table: "ScoreBoards",
                 column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_CreatedAt",
+                table: "Scores",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_Description",
+                table: "Scores",
+                column: "Description");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_PlayerName",
+                table: "Scores",
+                column: "PlayerName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_ScoreAmount",
+                table: "Scores",
+                column: "ScoreAmount");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_ScoreBoardId",
+                table: "Scores",
+                column: "ScoreBoardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_ScoreBoardIdentifier",
+                table: "Scores",
+                column: "ScoreBoardIdentifier");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_TimeAmount",
+                table: "Scores",
+                column: "TimeAmount");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -293,10 +351,13 @@ namespace Infrastructure.Migrations
                 name: "PromoCodes");
 
             migrationBuilder.DropTable(
-                name: "ScoreBoards");
+                name: "Scores");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "ScoreBoards");
 
             migrationBuilder.DropTable(
                 name: "Games");

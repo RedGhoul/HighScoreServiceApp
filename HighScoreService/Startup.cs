@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Domain.Entities;
+using Infrastructure.Persistence;
 
 namespace HighScoreService
 {
@@ -63,6 +64,7 @@ namespace HighScoreService
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                InitializeDatabase(app);
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -88,6 +90,12 @@ namespace HighScoreService
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
+            scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
         }
     }
 }

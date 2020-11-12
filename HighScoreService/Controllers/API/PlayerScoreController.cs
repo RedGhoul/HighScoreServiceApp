@@ -53,7 +53,7 @@ namespace HighScoreService.Controllers.API
             var scoreBoard = await _context.ScoreBoards.Where(x => x.Identifier.Equals(deleteScore.Identifier)).FirstOrDefaultAsync();
             if (scoreBoard == null) return BadRequest("Could not find your board");
             if (string.IsNullOrEmpty(deleteScore.PlayerName)) return BadRequest("Invalid User Name");
-            if (!await _scoreService.DeleteByUserNameAndBoard(scoreBoard.Identifier, deleteScore.PlayerName)) return BadRequest("Could Not Delete Scores");
+            if (!_scoreService.DeleteByUserNameAndBoard(scoreBoard.Identifier, deleteScore.PlayerName)) return BadRequest("Could Not Delete Scores");
             return Ok();
         }
 
@@ -62,7 +62,7 @@ namespace HighScoreService.Controllers.API
         {
             var scoreBoard = await _context.ScoreBoards.Where(x => x.Identifier.Equals(deleteAllScores.Identifier)).FirstOrDefaultAsync();
             if (scoreBoard == null) return BadRequest("Could not find your board");
-            if (!await _scoreService.DeleteByBoardName(scoreBoard.Identifier)) return BadRequest("Could Not Delete Scores");
+            if (!_scoreService.DeleteByBoardName(scoreBoard.Identifier)) return BadRequest("Could Not Delete Scores");
             return Ok();
         }
 

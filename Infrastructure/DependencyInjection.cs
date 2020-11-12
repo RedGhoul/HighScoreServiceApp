@@ -16,14 +16,14 @@ namespace Infrastructure
 
             if (configuration.GetValue<string>("Environment").Equals("Dev"))
             {
-                AppDBConnectionString = Secrets.getConnectionString(configuration, "HighScoreService_DB_LOCAL");
+                AppDBConnectionString = configuration.GetConnectionString("HighScoreService_DB_LOCAL");
             }
             else
             {
-                AppDBConnectionString = Secrets.getConnectionString(configuration, "HighScoreService_DB_PROD");
+                AppDBConnectionString = configuration.GetConnectionString("HighScoreService_DB_PROD");
             }
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(AppDBConnectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(AppDBConnectionString));
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
