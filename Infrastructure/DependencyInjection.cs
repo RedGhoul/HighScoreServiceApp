@@ -4,6 +4,8 @@ using Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using System;
 using System.Configuration;
 
 namespace Infrastructure
@@ -16,14 +18,25 @@ namespace Infrastructure
 
             if (configuration.GetValue<string>("Environment").Equals("Dev"))
             {
-                AppDBConnectionString = configuration.GetConnectionString("HighScoreService_DB_LOCAL");
+                AppDBConnectionString = Secrets.getConnectionString(configuration, "HighScoreService_DB_LOCAL");
             }
             else
             {
-                AppDBConnectionString = configuration.GetConnectionString("HighScoreService_DB_PROD");
+                AppDBConnectionString = Secrets.getConnectionString(configuration, "HighScoreService_DB_PROD");
             }
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(AppDBConnectionString));
+            services.AddDbContext<ApplicationDbContext>(options =>
+              options.UseMySql(
+                        // Replace with your connection string.
+                        AppDBConnectionString,
+                        // Replace with your server version and type.
+                        // For common usages, see pull request #1233.
+                        new MySqlServerVersion(new Version(8, 0, 21)), // use MariaDbServerVersion for MariaDB
+                        mySqlOptions => mySqlOptions
+                            .CharSetBehavior(CharSetBehavior.NeverAppend))
+                    // Everything from this point on is optional but helps with debugging.
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors());
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
