@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Configurations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,8 +39,9 @@ namespace Infrastructure
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors());
 
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<ScoreDatabaseSettings>(
                 configuration.GetSection(nameof(ScoreDatabaseSettings)));

@@ -25,14 +25,16 @@ namespace HighScoreService
             {
                 Console.WriteLine(e);
             }
-            using (SentrySdk.Init(configuration.GetConnectionString("Sentry_URL")))
+            using (SentrySdk.Init(Secrets.getConnectionString(configuration, "Sentry_URL")))
             {
+                var elastic = Secrets.getConnectionString(configuration, "ElasticIndexBaseUrl");
                 Log.Logger = new LoggerConfiguration()
                .Enrich.FromLogContext()
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri($"{Secrets.getConnectionString(configuration, "Log_ElasticIndexBaseUrl")}"))
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri($"{elastic}"))
                 {
                     AutoRegisterTemplate = true,
-                    ModifyConnectionSettings = x => x.BasicAuthentication(Secrets.GetSectionValue(configuration, "AppSettings", "elastic_name"), Secrets.GetSectionValue(configuration, "AppSettings", "elastic_pasword")),
+                    ModifyConnectionSettings = x => x.BasicAuthentication(Secrets.GetSectionValue(configuration, "AppSettings", "elastic_name"),
+                    Secrets.GetSectionValue(configuration, "AppSettings", "elastic_password")),
                     AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
                     IndexFormat = $"{Secrets.GetSectionValue(configuration, "AppSettings", "AppName")}" + "-{0:yyyy.MM}"
                 })
@@ -56,9 +58,11 @@ namespace HighScoreService
 
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseSerilog()
                 .UseStartup<Startup>();
+        }
     }
 }

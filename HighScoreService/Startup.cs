@@ -64,7 +64,7 @@ namespace HighScoreService
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-                InitializeDatabase(app);
+                //InitializeDatabase(app);
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -92,10 +92,10 @@ namespace HighScoreService
             });
         }
 
-        private void InitializeDatabase(IApplicationBuilder app)
-        {
-            using var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
-            scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
-        }
+        //private void InitializeDatabase(IApplicationBuilder app)
+        //{
+        //    using var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
+        //    scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+        //}
     }
 }

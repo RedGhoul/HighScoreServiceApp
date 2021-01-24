@@ -18,6 +18,7 @@ namespace Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.Entity<Game>()
             .HasMany(c => c.ScoreBoards)
             .WithOne(e => e.Game);

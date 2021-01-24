@@ -52,9 +52,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <Folder Include="Persistence\" />
+    <Folder Include="Entities\" />
+    <Folder Include="DTO\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Remove="appsettings.json" />
+  </ItemGroup>
 </Project>
