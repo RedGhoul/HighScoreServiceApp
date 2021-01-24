@@ -27,18 +27,18 @@ namespace HighScoreService
             }
             using (SentrySdk.Init(Secrets.getConnectionString(configuration, "Sentry_URL")))
             {
-                var elastic = Secrets.getConnectionString(configuration, "ElasticIndexBaseUrl");
-                Log.Logger = new LoggerConfiguration()
-               .Enrich.FromLogContext()
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri($"{elastic}"))
-                {
-                    AutoRegisterTemplate = true,
-                    ModifyConnectionSettings = x => x.BasicAuthentication(Secrets.GetSectionValue(configuration, "AppSettings", "elastic_name"),
-                    Secrets.GetSectionValue(configuration, "AppSettings", "elastic_password")),
-                    AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
-                    IndexFormat = $"{Secrets.GetSectionValue(configuration, "AppSettings", "AppName")}" + "-{0:yyyy.MM}"
-                })
-               .CreateLogger();
+               // var elastic = Secrets.getConnectionString(configuration, "ElasticIndexBaseUrl");
+               // Log.Logger = new LoggerConfiguration()
+               //.Enrich.FromLogContext()
+               // .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri($"{elastic}"))
+               // {
+               //     AutoRegisterTemplate = true,
+               //     ModifyConnectionSettings = x => x.BasicAuthentication(Secrets.GetSectionValue(configuration, "AppSettings", "elastic_name"),
+               //     Secrets.GetSectionValue(configuration, "AppSettings", "elastic_password")),
+               //     AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+               //     IndexFormat = $"{Secrets.GetSectionValue(configuration, "AppSettings", "AppName")}" + "-{0:yyyy.MM}"
+               // })
+               //.CreateLogger();
 
                 try
                 {
