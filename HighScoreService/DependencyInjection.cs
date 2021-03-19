@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Configuration;
 
@@ -29,13 +28,7 @@ namespace Infrastructure
             }
 
             services.AddDbContext<ApplicationDbContext>(options =>
-              options.UseMySql(
-                        AppDBConnectionString,
-                        new MySqlServerVersion(new Version(8, 0, 21)),
-                        mySqlOptions => mySqlOptions
-                            .CharSetBehavior(CharSetBehavior.NeverAppend))
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors());
+              options.UseNpgsql(AppDBConnectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
