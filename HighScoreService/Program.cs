@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Sentry;
-using Serilog;
-using Serilog.Sinks.Elasticsearch;
 using System;
 
 namespace HighScoreService

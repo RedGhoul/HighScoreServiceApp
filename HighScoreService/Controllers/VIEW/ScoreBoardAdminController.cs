@@ -149,7 +149,7 @@ namespace HighScoreService.Controllers.VIEW
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ViewAllScoreBoards));
             }
             ViewData["GameId"] = new SelectList(_context.Games, "Id", "Name", scoreBoard.GameId);
             return View(scoreBoard);

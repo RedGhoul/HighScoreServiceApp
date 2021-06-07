@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace Infrastructure.Persistence
     public class ScoreService
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<ScoreService> _logger;
 
-        public ScoreService(ApplicationDbContext context)
+        public ScoreService(ApplicationDbContext context, ILogger<ScoreService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public List<Score> GetTopScores(string ScoreBoardIdentifier, int amount)
@@ -37,6 +40,7 @@ namespace Infrastructure.Persistence
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to DeleteByUserNameAndBoard");
                 return false;
             }
         }
@@ -52,6 +56,7 @@ namespace Infrastructure.Persistence
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to DeleteByBoardName");
                 return false;
             }
         }
