@@ -16,16 +16,7 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            string AppDBConnectionString = "";
-
-            if (configuration.GetValue<string>("Environment").Equals("Dev"))
-            {
-                AppDBConnectionString = Secrets.getConnectionString(configuration, "HighScoreService_DB_LOCAL");
-            }
-            else
-            {
-                AppDBConnectionString = Secrets.getConnectionString(configuration, "HighScoreService_DB_PROD");
-            }
+            var AppDBConnectionString = Secrets.getConnectionString(configuration, "DefaultConnection");
 
             services.AddDbContext<ApplicationDbContext>(options =>
               options.UseNpgsql(AppDBConnectionString));
