@@ -1,4 +1,3 @@
-using HighScoreService.Swagger;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Domain.Entities;
@@ -30,18 +28,25 @@ namespace HighScoreService
             services.AddInfrastructure(Configuration);
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddResponseCompression();
-
-            //services.AddTransient<UserManager<ApplicationUser>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseResponseCompression();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthentication();
@@ -54,11 +59,5 @@ namespace HighScoreService
                 endpoints.MapRazorPages();
             });
         }
-
-        //private void InitializeDatabase(IApplicationBuilder app)
-        //{
-        //    using var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope();
-        //    scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
-        //}
     }
 }
