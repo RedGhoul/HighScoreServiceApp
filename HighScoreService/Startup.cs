@@ -32,21 +32,6 @@ namespace HighScoreService
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddResponseCompression();
 
-            // OPEN API
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-            services.AddApiVersioning(options =>
-            {
-                options.ReportApiVersions = true;
-            });
-            services.AddVersionedApiExplorer(options =>
-            {
-                options.GroupNameFormat = "'v'VVV";
-                options.SubstituteApiVersionInUrl = true;
-            });
-            services.AddSwaggerGen(options =>
-            {
-                options.OperationFilter<SwaggerDefaultValues>();
-            });
             //services.AddTransient<UserManager<ApplicationUser>>();
         }
 
@@ -61,16 +46,6 @@ namespace HighScoreService
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSwagger();
-            app.UseSwaggerUI(
-                options =>
-                {
-                    // build a swagger endpoint for each discovered API version
-                    foreach (var description in provider.ApiVersionDescriptions)
-                    {
-                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-                    }
-                });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
