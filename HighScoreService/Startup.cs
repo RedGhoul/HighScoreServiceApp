@@ -28,6 +28,7 @@ namespace HighScoreService
             services.AddInfrastructure(Configuration);
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddResponseCompression();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
