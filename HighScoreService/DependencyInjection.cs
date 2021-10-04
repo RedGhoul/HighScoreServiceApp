@@ -18,8 +18,9 @@ namespace Infrastructure
         {
             var AppDBConnectionString = Secrets.getConnectionString(configuration, "DefaultConnection");
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-              options.UseNpgsql(AppDBConnectionString));
+            services.AddDbContext<ApplicationDbContext>(dbContextOptions => dbContextOptions
+                .UseSqlServer(AppDBConnectionString)
+            );
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
