@@ -4,6 +4,7 @@ using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,9 +35,11 @@ namespace HighScoreService.Controllers.API
 
             var score = _scoreService.Create(new Score
             {
+                Id = Guid.NewGuid().ToString(),
                 ScoreBoardIdentifier = scoreBoard.Identifier,
                 PlayerName = addScore.PlayerName,
                 ScoreAmount = addScore.Score,
+                ScoreBoardId = scoreBoard.Id
             });
 
             return Ok(new SanitizedScore

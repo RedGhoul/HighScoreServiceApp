@@ -9,6 +9,7 @@ namespace Infrastructure.Persistence
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            Database.SetCommandTimeout(150000);
         }
         public DbSet<Score> Scores { get; set; }
         public DbSet<Game> Games { get; set; }

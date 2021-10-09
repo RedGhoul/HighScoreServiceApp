@@ -24,8 +24,8 @@ namespace Infrastructure.Persistence
         {
             return _context.Scores
                 .Where(x => x.ScoreBoardIdentifier.Equals(ScoreBoardIdentifier))
-                .OrderBy(x => x.ScoreAmount)
-                .Take(amount).AsNoTracking().ToList();
+                .OrderByDescending(x => x.ScoreAmount)
+                .Take(amount).ToList();
         }
             
 
@@ -33,7 +33,8 @@ namespace Infrastructure.Persistence
         {
             try
             {
-                var scoresToDelete = _context.Scores.Where(x => x.ScoreBoardIdentifier.Equals(ScoreBoardIdentifier) && x.PlayerName.Equals(Username));
+                var scoresToDelete = _context.Scores.Where(
+                    x => x.ScoreBoardIdentifier.Equals(ScoreBoardIdentifier) && x.PlayerName.Equals(Username));
                 _context.Scores.RemoveRange(scoresToDelete);
                 _context.SaveChanges();
                 return true;
