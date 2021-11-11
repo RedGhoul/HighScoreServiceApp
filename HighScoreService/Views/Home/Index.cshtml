@@ -1,32 +1,23 @@
-﻿<section id="hero" class="wow fadeIn">
-    <div class="hero-container">
-        <h1>Welcome to HighScoreService</h1>
-        <h2>An easy way for game developers to add leader boards to their games </h2>
+﻿<div class="card mt-2">
 
-
-        <a asp-area="Identity" asp-page="/Account/Register" class="btn-get-started scrollto">Sign Up Now</a>
-        <a asp-controller="ScoreBoard" asp-action="CreateScoreBoard" class="btn-get-started scrollto">Start Anonymously</a>
+    <div class="card-body">
+        <h1 class="card-title">Welcome to High Score Service</h1>
+        <h2 class="card-text">An easy way for game developers to add leader boards to their games</h2>
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">Sign Up Now</a>
+        <a asp-controller="ScoreBoard" asp-action="CreateScoreBoard" class="btn btn-primary">Start Anonymously</a>
     </div>
-</section>
-
-<section id="get-started" class="padd-section text-center wow fadeInUp">
-
-    <div class="container">
-        <div class="section-title text-center">
-
-            <h2>A Simple and Easy Process</h2>
-            <p class="separator">A 3 Step Process</p>
-
-        </div>
-    </div>
-
-    <div class="container">
+</div>
+<div class="card mt-2">
+    <div class="card-body">
+        <h2 class="card-title text-center">A Simple and Easy Process</h2>
+        <h4 class="card-title text-center">A 3 Step Process</h4>
+        <h4 class="card-text text-center">An easy way for game developers to add leader boards to their games</h4>
         <div class="row">
 
             <div class="col-md-6 col-lg-4">
                 <div class="feature-block">
 
-                    <img src="img/svg/cloud.svg" alt="img" class="img-fluid">
+                    <img src="img/svg/cloud.svg" alt="img" class="rounded">
                     <h4>Register or Start Anonymously</h4>
                     <p></p>
                     <a href="#"></a>
@@ -37,7 +28,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="feature-block">
 
-                    <img src="img/svg/planet.svg" alt="img" class="img-fluid">
+                    <img src="img/svg/planet.svg" alt="img" class="rounded">
                     <h4>Integrate into your Game</h4>
                     <p></p>
                     <a href="#"></a>
@@ -48,7 +39,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="feature-block">
 
-                    <img src="img/svg/asteroid.svg" alt="img" class="img-fluid">
+                    <img src="img/svg/asteroid.svg" alt="img" class="rounded">
                     <h4>Query our API</h4>
                     <p></p>
                     <a href="#"></a>
@@ -58,11 +49,26 @@
 
         </div>
     </div>
+</div>
+<section id="get-started" class="padd-section text-center wow fadeInUp">
+
+    <div class="container">
+        <div class="section-title text-center">
+
+
+            <p class="separator"></p>
+
+        </div>
+    </div>
+
+    <div class="container">
+
+    </div>
 
 </section>
 
 <!--==========================
-  Features Section
+Features Section
 ============================-->
 
 <section id="features" class="padd-section text-center wow fadeInUp">
@@ -107,7 +113,7 @@
 </section>
 
 <!--==========================
-  Pricing Table Section
+Pricing Table Section
 ============================-->
 @*<section id="pricing" class="padd-section text-center wow fadeInUp">
 
