@@ -1,134 +1,126 @@
-﻿<div class="card mt-2">
-
-    <div class="card-body">
-        <h1 class="card-title">Welcome to High Score Service</h1>
-        <h2 class="card-text">An easy way for game developers to add leader boards to their games</h2>
+﻿<div class="p-5 mb-4 bg-light rounded-3 mt-4">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome to High Score Service</h1>
+        <p class="col-md-8 fs-4">An easy way for game developers to add leader boards to their games</p>
         <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">Sign Up Now</a>
         <a asp-controller="ScoreBoard" asp-action="CreateScoreBoard" class="btn btn-primary">Start Anonymously</a>
     </div>
 </div>
-<div class="card mt-2">
-    <div class="card-body">
-        <h2 class="card-title text-center">A Simple and Easy Process</h2>
-        <h4 class="card-title text-center">A 3 Step Process</h4>
-        <h4 class="card-text text-center">An easy way for game developers to add leader boards to their games</h4>
-        <div class="row">
+<section id="about">
+    <div class="card mt-2">
+        <div class="card-body">
+            <h2 class="card-title text-center">Simple and Easy Processes</h2>
+            <h4 class="card-title text-center">3 Step Processes</h4>
+            <h4 class="card-title text-center">An easy way for game developers to add leader boards to their games</h4>
+            <div class="row">
 
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block">
-
-                    <img src="img/svg/cloud.svg" alt="img" class="rounded">
-                    <h4>Register or Start Anonymously</h4>
-                    <p></p>
-                    <a href="#"></a>
-
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Register or Start Anonymously</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <img src="img/svg/cloud.svg" alt="img" class="rounded">
+                                </li>
+                            </ul>
+                            <a asp-area="Identity" asp-page="/Account/Register" class="w-100 btn btn-lg btn-outline-primary">Signup Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Integrate into your Game</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <img src="img/svg/planet.svg" alt="img" class="rounded">
+                                </li>
+                            </ul>
+                            <a href="/moretocome" class="w-100 btn btn-lg btn-outline-primary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Query Our API</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <img src="img/svg/asteroid.svg" alt="img" class="rounded">
+                                </li>
+                            </ul>
+                            <a href="~/swagger/index.html" target="_blank" rel="noopener noreferrer" class="w-100 btn btn-lg btn-outline-primary">View API</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block">
-
-                    <img src="img/svg/planet.svg" alt="img" class="rounded">
-                    <h4>Integrate into your Game</h4>
-                    <p></p>
-                    <a href="#"></a>
-
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-block">
-
-                    <img src="img/svg/asteroid.svg" alt="img" class="rounded">
-                    <h4>Query our API</h4>
-                    <p></p>
-                    <a href="#"></a>
-
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
-<section id="get-started" class="padd-section text-center wow fadeInUp">
-
-    <div class="container">
-        <div class="section-title text-center">
-
-
-            <p class="separator"></p>
-
-        </div>
-    </div>
-
-    <div class="container">
-
-    </div>
-
 </section>
-
-<!--==========================
-Features Section
-============================-->
-
-<section id="features" class="padd-section text-center wow fadeInUp">
+<section id="features">
 
     <div class="container">
         <div class="section-title text-center">
-            <h2>Amazing Features.</h2>
-            <p class="separator">Integer cursus bibendum augue ac cursus .</p>
+            <h2>Amazing Features</h2>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
-
             <div class="col-md-6 col-lg-4">
-                <div class="feature-block">
-                    <img src="img/svg/design-tool.svg" alt="img" class="img-fluid">
-                    <h4>Easy to Use</h4>
-                    <p>Dead simple to integrate into Unity</p>
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Easy to Use</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>
+                                <img src="img/svg/design-tool.svg" alt="img" class="img-fluid">
+                                <p>Dead simple to integrate into Unity</p>
+                            </li>
+                        </ul>
+                        <a target="_blank" rel="noopener noreferrer" href="~/swagger/index.html" class="w-100 btn btn-lg btn-outline-primary">More Info</a>
+                    </div>
                 </div>
             </div>
-
             <div class="col-md-6 col-lg-4">
-                <div class="feature-block">
-                    <img src="img/svg/pixel.svg" alt="img" class="img-fluid">
-                    <h4>No Vendor Lock in</h4>
-                    <p>Wanna switch ? Or roll your own solution ? Go ahead</p>
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">No Vendor Lock in</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>
+                                <img src="img/svg/pixel.svg" alt="img" class="img-fluid">
+                                <p>Wanna switch ? Or roll your own solution ? Go ahead</p>
+                            </li>
+                        </ul>
+                        <a target="_blank" rel="noopener noreferrer" href="~/swagger/index.html" class="w-100 btn btn-lg btn-outline-primary">More Info</a>
+                    </div>
                 </div>
             </div>
-
             <div class="col-md-6 col-lg-4">
-                <div class="feature-block">
-                    <img src="img/svg/code.svg" alt="img" class="img-fluid">
-                    <h4>Cleaner Code</h4>
-                    <p>No need to integrate a 3rd party SDK</p>
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Cleaner Code</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>
+                                <img src="img/svg/code.svg" alt="img" class="img-fluid">
+                                <p>No need to integrate a 3rd party SDK</p>
+                            </li>
+                        </ul>
+                        <a target="_blank" rel="noopener noreferrer" href="~/swagger/index.html" class="w-100 btn btn-lg btn-outline-primary">More Info</a>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </section>
-
-<!--==========================
-Pricing Table Section
-============================-->
-@*<section id="pricing" class="padd-section text-center wow fadeInUp">
-
-    <div class="container">
-        <div class="section-title text-center">
-
-            <h2>Pricing</h2>
-            <p class="separator">Coming Soon</p>
-            <p class="separator">Sign Up to use the free tier</p>
-        </div>
-    </div>
-
-</section>
-<style>
-    .footer {
-        position: inherit;
-    }
-</style>*@

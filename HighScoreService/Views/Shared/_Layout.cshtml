@@ -7,178 +7,102 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.0/litera/bootstrap.min.css"
+          integrity="sha512-RxCahUxa1Cg6Zebd0MrBja/PvGkHdD+xKCDDWVSls3qRGuvjaLQe56GPrUO9Ab0JB+sR1IPcwm/Qg1g1eHMr/Q=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.css">
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary ms-auto">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">High Score Service</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/">Highscore Service</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ms-auto">
+                
+
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <li>
-                        <a class="nav-item nav-link" asp-action="ViewAllGames" asp-controller="GamesAdmin">Games</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-action="ViewAllGames" asp-controller="GamesAdmin">Games</a>
                     </li>
-                    <li>
-                        <a class="nav-item nav-link" asp-action="ViewAllScoreBoards" asp-controller="ScoreBoardAdmin">Boards</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-action="ViewAllScoreBoards" asp-controller="ScoreBoardAdmin">Boards</a>
                     </li>
-                    <li>
-                        <a class="nav-item nav-link" href="~/swagger/index.html" target="_blank" rel="noopener noreferrer">API Docs</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="~/swagger/index.html" target="_blank" rel="noopener noreferrer">API Docs</a>
                     </li>
-
-                    <li>
-                        <a class="nav-item nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Profile</a>
-                    </li>
-                    <li>
-                        <a class="nav-item nav-link" asp-action="Logout" asp-controller="Logout">Logout</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
+                        <div class="dropdown-menu">
+                            <a class="btn btn-default" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">My Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="btn btn-default" asp-action="Logout" asp-controller="Logout">Logout</a>
+                        </div>
                     </li>
                 }
                 else
                 {
-                    <li>
-                        <a class="nav-item nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#features">Features</a>
                     </li>
-                    <li>
-                        <a class="nav-item nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/moretocome">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-area="Identity" asp-page="/Account/Login">Login</a>
                     </li>
                 }
+
             </ul>
         </div>
     </div>
 </nav>
+
+
 <div class="container">
     <main role="main" class="body">
         @RenderBody()
     </main>
 </div>
+<div class="container">
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">Features</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">FAQs</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-muted">About</a>
+            </li>
+        </ul>
+        <p class="text-center text-muted">© Copyrights HighScoreService. All rights reserved.</p>
+        <p class="text-center text-muted">Created by Avaneesa Basappa</p>
+    </footer>
+</div>
 
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-sm-3 col-md-12 col-lg-4">
-                <div class="footer-logo">
-
-                    <a class="navbar-brand" href="#">HighScore</a>
-                    <p>An easy way for video game developers to add leader boards to their games</p>
-
-                </div>
-            </div>
-
-            <div class="col-sm-3 col-md-3 col-lg-2">
-                <div class="list-menu">
-
-                    <h4>About Us</h4>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Coming Soon</a>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </div>
-
-            <div class="col-sm-3 col-md-3 col-lg-2">
-                <div class="list-menu">
-
-                    <h4>Contact Us</h4>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Coming Soon</a>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </div>
-
-            <div class="col-sm-3 col-md-3 col-lg-2">
-                <div class="list-menu">
-
-                    <h4>Support</h4>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Coming Soon</a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-
-            <div class="col-sm-3 col-md-3 col-lg-2">
-                <div class="list-menu">
-
-                    <h4>Examples</h4>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#">Coming Soon</a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="copyrights">
-        <div class="container">
-            <p>&copy; Copyrights HighScore. All rights reserved.</p>
-            <div class="credits">
-
-                Designed by Avaneesa Basappa
-            </div>
-        </div>
-    </div>
-
-</footer>
-
-<a href="#" class="back-to-top">
-    <i class="fa fa-chevron-up"></i>
-</a>
-
-<!-- JavaScript Libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.0/jquery-migrate.min.js" integrity="sha256-JklDYODbg0X+8sPiKkcFURb5z7RvlNMIaE3RA2z97vw=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.10/js/superfish.min.js" integrity="sha256-7OVlofZqMjR9/tg1YsQo/3c2ZI3nKwAn3Y8ODyfgwyc=" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css" integrity="sha256-AWqwvQ3kg5aA5KcXpX25sYKowsX97sTCTbeo33Yfyk0=" crossorigin="anonymous"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha256-z6FznuNG1jo9PP3/jBjL6P3tvLMtSwiVAowZPOgo56U=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
 <script src="~/js/main.js"></script>
-
-<script>
-    var _paq = window._paq = window._paq || [];
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-        var u="//matomo.experimentsinthedeep3.com/";
-        _paq.push(['setTrackerUrl', u+'matomo.php']);
-        _paq.push(['setSiteId', '7']);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-    })();
-    </script>
 
 @RenderSection("Scripts", required: false)
 </body>

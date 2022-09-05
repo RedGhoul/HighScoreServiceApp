@@ -1,34 +1,36 @@
 ﻿@model List<Domain.Entities.ScoreBoard>
-<link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
-<link href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css" rel="stylesheet">
-<div class="row btabletitle">
-    <div class="col-md-4">
+<div class="container mt-5">
+
+    <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
+    <link href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css" rel="stylesheet">
+    <div class="row btabletitle">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4 text-center">
+            <h1>Your Boards</h1>
+        </div>
+        <div class="col-md-4">
+        </div>
 
     </div>
-    <div class="col-md-4 text-center">
-        <h1>Your Boards</h1>
-    </div>
-    <div class="col-md-4">
-    </div>
+    <div class="row btablespace">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 text-center">
+            <a class="btn btn-secondary btn-sm" asp-action="Create">Create</a>
+        </div>
+        <div class="col-md-4">
+        </div>
 
-</div>
-<div class="row btablespace">
-    <div class="col-md-4">
     </div>
-    <div class="col-md-4 text-center">
-        <a class="btn btn-secondary btn-sm" asp-action="Create">Create</a>
-    </div>
-    <div class="col-md-4">
-    </div>
-
-</div>
-<div class="row btable">
-    <div class="col-md-12">
-        <table id="table"
-               data-height="600"
-               data-search="true"
-               data-pagination="true">
-            <thead>
+    <div class="row btable">
+        <div class="col-md-12">
+            <table id="table"
+                   data-height="600"
+                   data-search="true"
+                   data-pagination="true">
+                <thead>
                 <tr>
                     <th data-field="Identifier" data-sortable="true">
                         Identifier
@@ -44,8 +46,8 @@
                     </th>
                     <th>Actions</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @for (int i = 0; i < Model.Count(); i++)
                 {
                     <tr id="tr-id-@i" class="tr-class-@i" data-title="bootstrap table" data-object='{"key": "value"}'>
@@ -69,11 +71,14 @@
                         </td>
                     </tr>
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
 </div>
+
 @section Scripts{
 
     <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure
 {
@@ -16,10 +17,13 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var AppDBConnectionString = Secrets.getConnectionString(configuration, "DefaultConnection");
+            var DBConnectionString = Secrets.getConnectionString(configuration, "DefaultConnection");
 
             services.AddDbContext<ApplicationDbContext>(dbContextOptions => dbContextOptions
-                .UseSqlServer(AppDBConnectionString)
+                .UseMySql(DBConnectionString, new MySqlServerVersion(new Version(8, 0, 29)))
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
             );
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -70,7 +74,7 @@ namespace Infrastructure
                 options.SlidingExpiration = true;
             });
 
-            services.AddTransient<ScoreService, ScoreService>();
+            services.AddTransient<ScoreService>();
 
             return services;
         }

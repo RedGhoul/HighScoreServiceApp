@@ -66,7 +66,10 @@ namespace HighScoreService.Controllers.VIEW
 
             CreateScoreBoardViewModel createScoreBoardView = new CreateScoreBoardViewModel();
             List<SelectListItem> list = new List<SelectListItem>();
-            var games = await _context.Games.ToListAsync();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null) return RedirectToAction(nameof(ViewAllScoreBoards));
+            var gameBoards = await _context.ScoreBoards.Select(x => x.GameId).ToListAsync();
+            var games = await _context.Games.Where(x => x.ApplicationUserId == user.Id && !gameBoards.Contains(x.Id)).ToListAsync();
             foreach (var game in games)
             {
                 list.Add(new SelectListItem
